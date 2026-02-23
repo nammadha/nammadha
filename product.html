@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAMMADHA | Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050505; color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .active-filter { background: white !important; color: black !important; transform: scale(1.05); }
+        .product-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .product-card:active { scale: 0.95; }
+        .hidden-item { display: none; opacity: 0; transform: translateY(20px); }
+        .show-item { display: block; animation: fadeIn 0.5s forwards; }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="text-center mb-10 mt-6">
+        <h1 class="text-4xl font-black tracking-tighter italic mb-2">NAMMADHA</h1>
+        <p class="text-indigo-400 text-[10px] tracking-[0.4em] uppercase font-bold">Exclusive Collections</p>
+    </header>
+
+    <nav class="flex flex-wrap justify-center gap-2 mb-12">
+        <button onclick="filterSelection('all')" class="filter-btn active-filter glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">All</button>
+        <button onclick="filterSelection('men')" class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Men</button>
+        <button onclick="filterSelection('women')" class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Women</button>
+        <button onclick="filterSelection('hotwheels')" class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Hot Wheels</button>
+        <button onclick="filterSelection('jewelry')" class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Jewelry</button>
+    </nav>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+        
+        <div class="product-item men hotwheels show-item">
+            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
+                <div class="aspect-square bg-zinc-900 rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
+                    <span class="text-4xl">🏎️</span>
+                </div>
+                <h3 class="font-bold text-sm">Hot Wheels GT</h3>
+                <p class="text-gray-500 text-[10px] uppercase mt-1">Men's Collection</p>
+            </div>
+        </div>
+
+        <div class="product-item men show-item">
+            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
+                <div class="aspect-square bg-zinc-900 rounded-2xl mb-4 flex items-center justify-center">
+                    <span class="text-4xl">🖼️</span>
+                </div>
+                <h3 class="font-bold text-sm">Car Frame V2</h3>
+                <p class="text-gray-500 text-[10px] uppercase mt-1">Room Decor</p>
+            </div>
+        </div>
+
+        <div class="product-item women jewelry show-item">
+            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
+                <div class="aspect-square bg-zinc-900 rounded-2xl mb-4 flex items-center justify-center">
+                    <span class="text-4xl">💍</span>
+                </div>
+                <h3 class="font-bold text-sm">Silver Minimal Ring</h3>
+                <p class="text-gray-500 text-[10px] uppercase mt-1">Women's Jewelry</p>
+            </div>
+        </div>
+
+        <div class="product-item women jewelry show-item">
+            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
+                <div class="aspect-square bg-zinc-900 rounded-2xl mb-4 flex items-center justify-center">
+                    <span class="text-4xl">✨</span>
+                </div>
+                <h3 class="font-bold text-sm">Golden Bracelet</h3>
+                <p class="text-gray-500 text-[10px] uppercase mt-1">Premium Chain</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-20">
+        <p class="text-gray-600 text-[10px] tracking-widest uppercase mb-4">Interested in an item?</p>
+        <a href="https://wa.me/91XXXXXXXXXX" class="inline-block bg-white text-black px-10 py-4 rounded-2xl font-black text-xs tracking-widest hover:scale-105 transition-all">
+            WHATSAPP TO ORDER
+        </a>
+    </div>
+
+    <script>
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("product-item");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                x[i].classList.replace("show-item", "hidden-item");
+                if (x[i].className.indexOf(c) > -1) {
+                    x[i].classList.replace("hidden-item", "show-item");
+                }
+            }
+            
+            // Highlight active button
+            var btns = document.getElementsByClassName("filter-btn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active-filter");
+            }
+            event.currentTarget.classList.add("active-filter");
+        }
+    </script>
+</body>
+</html>
