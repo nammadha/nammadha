@@ -1,155 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NAMMADHA | Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #050505;
-            color: white;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-        }
-
+        body { background-color: #050505; color: white; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        
+        /* Glassmorphism Effect */
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .active-filter {
-            background: white !important;
-            color: black !important;
-            transform: scale(1.05);
+        /* Fixed Scale for Images (The WOW factor) */
+        .img-container {
+            width: 100%;
+            aspect-ratio: 3 / 4; /* Standard Scale Packaging Ratio */
+            background-color: #111;
+            overflow: hidden;
+            border-radius: 1.5rem;
         }
 
-        .product-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This forces all images to fit the same box */
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .product-card:active {
-            scale: 0.95;
-        }
+        .product-card:hover img { transform: scale(1.1); }
 
-        .hidden-item {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+        .active-filter { background: white !important; color: black !important; transform: scale(1.05); }
 
-        .show-item {
-            display: block;
-            animation: fadeIn 0.5s forwards;
-        }
+        /* Smooth Filter Animations */
+        .hidden-item { display: none; opacity: 0; transform: scale(0.9); }
+        .show-item { display: block; animation: zoomIn 0.4s forwards; }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
     </style>
 </head>
 
 <body class="p-4 md:p-8">
 
-    <header class="text-center mb-10 mt-6">
-        <h1 class="text-4xl font-black tracking-tighter italic mb-2">NAMMADHA</h1>
-        <p class="text-indigo-400 text-[10px] tracking-[0.4em] uppercase font-bold">Exclusive Collections</p>
+    <div class="max-w-6xl mx-auto mb-6">
+        <a href="index.html" class="inline-flex items-center text-xs font-bold text-gray-500 hover:text-white transition-colors">
+            <span class="mr-2">←</span> BACK TO HOME
+        </a>
+    </div>
+
+    <header class="text-center mb-10">
+        <h1 class="text-5xl font-black tracking-tighter italic mb-2 bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">NAMMADHA</h1>
+        <p class="text-indigo-400 text-[10px] tracking-[0.5em] uppercase font-bold">Showroom Premium</p>
     </header>
 
     <nav class="flex flex-wrap justify-center gap-2 mb-12">
-        <button onclick="filterSelection('all')"
-            class="filter-btn active-filter glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">All</button>
-        <button onclick="filterSelection('men')"
-            class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Men</button>
-        <button onclick="filterSelection('women')"
-            class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Women</button>
-        <button onclick="filterSelection('hotwheels')"
-            class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Hot
-            Wheels</button>
-        <button onclick="filterSelection('jewelry')"
-            class="filter-btn glass px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Jewelry</button>
+        <button onclick="filterSelection('all')" class="filter-btn active-filter glass px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">All Items</button>
+        <button onclick="filterSelection('men')" class="filter-btn glass px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">Men</button>
+        <button onclick="filterSelection('women')" class="filter-btn glass px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">Women</button>
+        <button onclick="filterSelection('hotwheels')" class="filter-btn glass px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">Hot Wheels</button>
+        <button onclick="filterSelection('jewelry')" class="filter-btn glass px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">Jewelry</button>
     </nav>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
 
         <div class="product-item men hotwheels show-item">
-            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
-                <div
-                    class="aspect-square bg-zinc-900 rounded-2xl mb-4 overflow-hidden flex items-center justify-center">
-                    <img src="image/hotlogo.jpg" alt="Hot Wheels GT"
-                        class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+            <div class="product-card glass rounded-[2rem] p-3 h-full flex flex-col group">
+                <div class="img-container mb-4">
+                    <img src="image/hotlogo.jpg" alt="Hot Wheels GT">
                 </div>
-
-                <h3 class="font-bold text-sm">Hot Wheels GT</h3>
-                <p class="text-gray-500 text-[10px] uppercase mt-1">Men's Collection</p>
+                <div class="px-2">
+                    <h3 class="font-bold text-sm tracking-tight">Hot Wheels GT</h3>
+                    <p class="text-gray-500 text-[9px] uppercase mt-1">Limited Scale</p>
+                </div>
             </div>
         </div>
+
         <div class="product-item men show-item">
-            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
-                <div class="aspect-square bg-zinc-900 rounded-2xl mb-4 flex items-center justify-center">
-                    <img src="image/frame.jpg"alt="Photo Frame"
-                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    
+            <div class="product-card glass rounded-[2rem] p-3 h-full flex flex-col group">
+                <div class="img-container mb-4">
+                    <img src="image/frame.jpg" alt="Photo Frame">
                 </div>
-                <h3 class="font-bold text-sm">Car Frame V2</h3>
-                <p class="text-gray-500 text-[10px] uppercase mt-1">Room Decor</p>
+                <div class="px-2">
+                    <h3 class="font-bold text-sm tracking-tight">Car Frame V2</h3>
+                    <p class="text-gray-500 text-[9px] uppercase mt-1">Interior Decor</p>
+                </div>
             </div>
         </div>
 
         <div class="product-item women jewelry show-item">
-            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
-                <div class="aspect-square bg-zinc-900 rounded-2xl mb-4 flex items-center justify-center">
-                     <img src="image/ringlogo.jpg"alt="Ring Logo"
-                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    
+            <div class="product-card glass rounded-[2rem] p-3 h-full flex flex-col group">
+                <div class="img-container mb-4">
+                    <img src="image/ringlogo.jpg" alt="Ring Logo">
                 </div>
-                <h3 class="font-bold text-sm">Silver Minimal Ring</h3>
-                <p class="text-gray-500 text-[10px] uppercase mt-1">Women's Jewelry</p>
+                <div class="px-2">
+                    <h3 class="font-bold text-sm tracking-tight">Silver Minimal Ring</h3>
+                    <p class="text-gray-500 text-[9px] uppercase mt-1">Women's Premium</p>
+                </div>
             </div>
         </div>
 
         <div class="product-item women jewelry show-item">
-            <div class="product-card glass rounded-3xl p-3 h-full flex flex-col">
-                <div class="aspect-square bg-zinc-900 rounded-2xl mb-4 flex items-center justify-center">
-                     <img src="image/braceletlogo.jpg"alt="Bracelet Logo"
-                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    
+            <div class="product-card glass rounded-[2rem] p-3 h-full flex flex-col group">
+                <div class="img-container mb-4">
+                    <img src="image/braceletlogo.jpg" alt="Bracelet Logo">
                 </div>
-                <h3 class="font-bold text-sm">Golden Bracelet</h3>
-                <p class="text-gray-500 text-[10px] uppercase mt-1">Premium Chain</p>
+                <div class="px-2">
+                    <h3 class="font-bold text-sm tracking-tight">Golden Bracelet</h3>
+                    <p class="text-gray-500 text-[9px] uppercase mt-1">Premium Chain</p>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <div class="text-center mt-20">
-        <p class="text-gray-600 text-[10px] tracking-widest uppercase mb-4">Interested in an item?</p>
+    <div class="text-center mt-24 mb-12">
+        <p class="text-gray-600 text-[10px] tracking-widest uppercase mb-6">Found something you love?</p>
         <a href="https://wa.me/91XXXXXXXXXX"
-            class="inline-block bg-white text-black px-10 py-4 rounded-2xl font-black text-xs tracking-widest hover:scale-105 transition-all">
-            WHATSAPP TO ORDER
+            class="inline-block bg-white text-black px-12 py-5 rounded-2xl font-black text-xs tracking-[0.2em] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all active:scale-95">
+            ORDER ON WHATSAPP
         </a>
     </div>
 
     <script>
         function filterSelection(c) {
-            var x, i;
-            x = document.getElementsByClassName("product-item");
-            if (c == "all") c = "";
-            for (i = 0; i < x.length; i++) {
-                x[i].classList.replace("show-item", "hidden-item");
-                if (x[i].className.indexOf(c) > -1) {
-                    x[i].classList.replace("hidden-item", "show-item");
+            var x = document.getElementsByClassName("product-item");
+            var filter = c === 'all' ? "" : c;
+            
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.add("hidden-item");
+                x[i].classList.remove("show-item");
+                if (x[i].className.indexOf(filter) > -1) {
+                    x[i].classList.remove("hidden-item");
+                    x[i].classList.add("show-item");
                 }
             }
 
-            // Highlight active button
+            // Update UI buttons
             var btns = document.getElementsByClassName("filter-btn");
             for (var i = 0; i < btns.length; i++) {
                 btns[i].classList.remove("active-filter");
@@ -158,5 +151,4 @@
         }
     </script>
 </body>
-
 </html>
